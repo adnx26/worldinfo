@@ -17,7 +17,7 @@ anychart.onDocumentReady(drawCoronoChart());
 function drawCoronoChart() {
     anychart.data.loadJsonFile(
         // The data used in this sample can be obtained from the CDN
-        'https://worldinf.imfast.io/coronanew.json',
+        'https://worldinf.imfast.io/covid19.json',
         function (data) {
             map = anychart.map();
 
