@@ -1,16 +1,5 @@
 var map;
 
-/*
-anychart.onDocumentReady(function () {
-    anychart.data.loadJsonFile(
-        // The data used in this sample can be obtained from the CDN
-        'https://cdn.anychart.com/samples-data/maps-general-features/world-mammal-species-theatened.json',
-        drawEndagerAnimal(data));
-
-    });
-
-*/
-
 anychart.onDocumentReady(drawCoronoChart());
 
 
@@ -26,7 +15,7 @@ function drawCoronoChart() {
             map.title()
                 .enabled(true)
                 .padding([10, 0, 10, 0])
-                .text('World COVID-19 Infection\nLast Updated May 10, 2020');
+                .text('World COVID-19 Infection\nLast Updated May 21, 2020\nDeveloped by Advaith Nair');
                 
 
             // Sets geodata using https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js
@@ -43,7 +32,7 @@ function drawCoronoChart() {
             var series = map.bubble(data);
 
             series.labels().format("{%name}");
-            series.tooltip().format("{%size} Infected \n{%death} Deaths \n{%recovered} Recovered ")
+            series.tooltip().format("{%size} Infected \n{%Deaths} Deaths \n{%Recovered} Recovered ")
 
 
 
@@ -76,5 +65,3 @@ function drawCoronoChart() {
             map.draw();
         });
 }
-
-
