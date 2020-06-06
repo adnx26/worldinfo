@@ -15,7 +15,7 @@ function drawCoronoChart() {
             map.title()
                 .enabled(true)
                 .padding([10, 0, 10, 0])
-                .text('World COVID-19 Infection\nLast Updated May 21, 2020\nDeveloped by Advaith Nair');
+                .text('World COVID-19 Infection\nLast Updated June 6, 2020\nDeveloped by Advaith Nair');
                 
 
             // Sets geodata using https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js
