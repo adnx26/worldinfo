@@ -1,4 +1,4 @@
-﻿<html>
+<html>
     <head>
       <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
       <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
@@ -9,6 +9,17 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
       <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
       <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      
       <style type="text/css">
 html,
 body {
@@ -18,8 +29,12 @@ body {
     padding: 0;
 }
     
-#container {
-    height: calc(100% - 60px);
+#map {  
+    height: calc(70% - 60px);
+}
+
+#chart{
+    height: calc(45% - 100px);
 }
     
 .toolbar {
@@ -34,8 +49,12 @@ body {
     </style>
     </head>
     <body>
-
-      <div id="container"></div>
+      <div id="map"></div>
+      <div id="chart"></div>
+      <div class="row">
+        <div class="col-sm-4 text-danger" style="background-color:37474F">Data from <a href="https://www.esri.com/">https://www.esri.com/</a></div>
+        <div class="col-sm-8 text-danger" style="background-color:37474F" ></div>
+      </div>
       <script src="worldinfo.js"></script>
     </body>
     </html>
