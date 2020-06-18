@@ -67,15 +67,7 @@ function drawCoronaMap(){
             var selectedPointsSize = points.reduce(function (sum, point) {
                     return sum + point.get('size');
             }, 0);
-                    
-            // set new chart title
-             map
-                    .title()
-                    .text(
-                    'World Mammals Species Threatened , by country\n' +
-                    selectedPointsSize +
-                    '  Mammal Species threatened in selected area in 2018 '
-                    );
+            
             }
         }
 
