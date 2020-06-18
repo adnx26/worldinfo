@@ -26,7 +26,7 @@ function drawCoronaMap(){
               map.padding(0);
   
               // set polygon marquee colors
-              map.selectPolygonMarqueeFill('#333 .3');
+              map.selectPolygonMarqueeFill('#333 .30');
               map.selectPolygonMarqueeStroke('#333');
 
               
