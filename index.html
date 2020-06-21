@@ -9,33 +9,26 @@
 <html>
 
 <head>
-    <script
-        src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-    <script
-        src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-    <script
-        src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-    <script
-        src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-    <script
-        src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-    <script src="https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
-    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"
-        type="text/css" rel="stylesheet">
-    <link
-        href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"
-        type="text/css" rel="stylesheet">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!--Required Scripts for Bar Chart-->
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+    <!--Required Scripts for Map-->
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+    <script src="https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
+    <!--My Script-->
+    <script src="worldinfo.js"></script>
 
     <style type="text/css">
         html,
@@ -47,11 +40,11 @@
         }
 
         #amap {
-            height: calc(60%);
+            height: calc(50%);
         }
 
         #achart {
-            height: calc(35%);
+            height: calc(45%);
         }
 
         .toolbar {
@@ -71,28 +64,31 @@
         div.center {
             text-align: center;
         }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-sm-4 text-white" style="background-color:37474F">  Developd By <a
-                href="http://www.advaithn.com">Advaith Nair</a> <br>  COVID-19 Data Source <a href="https://www.esri.com/en-us/covid-19/overview"> ArcGIS</a></div>
-        <div class="col-sm-4 text-danger center" style="background-color:37474F">
-            <h2><a href="https://worldinf.imfast.io/index.html">Covid-19 Dashboard </a></h2>
-        </div>
-        <div class="col-sm-4 text-danger right" style="background-color:37474F "></div>
-    </div>
-    
-    <div id="amap" ></div>
-   
-    <div >
-        <div id="achart"></div>
-    </div>
 
+            <div class="row">
+                <div class="col-sm-4 text-white" style="background-color:37474F"> Developd By <a
+                        href="http://www.advaithn.com">Advaith Nair</a> <br> COVID-19 Data Source <a
+                        href="https://www.esri.com/en-us/covid-19/overview"> ArcGIS</a></div>
+                <div class="col-sm-4 text-danger center" style="background-color:37474F">
+                    <h2><a href="https://worldinf.imfast.io/index.html">Covid-19 Dashboard </a></h2>
+                </div>
+                <div class="col-sm-4 text-danger right" style="background-color:37474F "></div>
+            </div>
 
+            <div id="amap"></div>
+            <div id="achart"></div>
 
-    <script src="worldinfo.js"></script>
 </body>
 
 </html>
