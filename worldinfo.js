@@ -3,7 +3,6 @@
   Author : Advaith Nair
   Code Last Updated : June 21, 2020
   Copyright 2020 www.advaithn.com
-  Latest Update : Apperance Update
 */
 
 
@@ -93,7 +92,7 @@ function drawCoronaMap() {
       zoomController.render(map);
 
       // set container id for the chart
-      map.container('map');
+      map.container('amap');
       // initiate chart drawing
       map.draw();
     }
@@ -138,12 +137,12 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], [], [], [], [], [], []
+        [], [], [], [], []
       ]
 
       console.log(coronadata);
 
-      var size = 10;
+      var size = 5;
       var listItem = coronadata.slice(0, size);
 
 
@@ -177,7 +176,7 @@ function drawBarChart() {
      chart.padding([10, 40, 5, 20]);
 
         // set chart title text settings
-        chart.title('Top 10 Infected Countries');
+        chart.title('Top 5 Infected Countries');
 
         // set scale minimum
         chart.yScale().minimum(0);
@@ -187,8 +186,8 @@ function drawBarChart() {
         chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
 
         // set titles for axises
-        chart.xAxis().title('Products');
-        chart.yAxis().title('Revenue in Dollars');
+        chart.xAxis().title('Country');
+        chart.yAxis().title('');
 
         // helper function to setup label settings for all series
         var setupSeries = function (series, name) {
@@ -223,13 +222,13 @@ function drawBarChart() {
       
 
       // Set point width.
-      series.pointWidth(10);
+      //series.pointWidth(10);
 
       //chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
       // set the padding between bar groups
       chart.barGroupsPadding(1);
 
-      chart.container("chart");
+      chart.container("achart");
 
       chart.draw();
     }
