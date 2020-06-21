@@ -1,7 +1,7 @@
 /*
   Script to generate Map and Charts using GIS COVID Data
   Author : Advaith Nair
-  Last Updated : June 19, 2020
+  Code Last Updated : June 21, 2020
   Copyright 2020 www.advaithn.com
 */
 
@@ -10,7 +10,6 @@
 var map;
 
 anychart.onDocumentReady(drawCoronaMap(), drawBarChart());
-
 
 function drawCoronaMap() {
   // set chart theme
@@ -137,7 +136,7 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], [],[], [], [], [], []
+        [], [], [], [], [], [], [], [], [], []
       ]
 
       console.log(coronadata);
@@ -160,13 +159,12 @@ function drawBarChart() {
 
       var series = chart.bar(mapping);
 
-    // Set point width.
-    series.pointWidth(10);
+      // Set point width.
+      series.pointWidth(10);
 
       chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
       // set the padding between bar groups
-      chart.barGroupsPadding(0.2);
-
+      chart.barGroupsPadding(0.1);
 
       chart.container("chart");
 
