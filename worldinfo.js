@@ -137,16 +137,16 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], [], [], [], [], [], []
+        [], [], [], [], []
       ]
 
       console.log(coronadata);
 
-      var size = 10;
+      var size = 5;
       var listItem = coronadata.slice(0, size);
 
 
-      for (i = 0; i < 10; i++) {
+      for (i = 0; i < size; i++) {
         barChartData[i].push(listItem[i][0], Math.round(listItem[i][1] / 10000));
       }
       console.log(barChartData);
@@ -160,7 +160,7 @@ function drawBarChart() {
 
       var series = chart.bar(mapping);
 
-      chart.title("Top 10 Countries Infected with Covid-19 \n In 10000s");
+      chart.title("Top 5 Countries Infected with Covid-19 in 10000s");
 
       chart.container("chart");
 
