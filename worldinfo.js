@@ -137,12 +137,12 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], []
+        [], [], [], [], [],[], [], [], [], []
       ]
 
       console.log(coronadata);
 
-      var size = 5;
+      var size = 10;
       var listItem = coronadata.slice(0, size);
 
 
@@ -160,7 +160,13 @@ function drawBarChart() {
 
       var series = chart.bar(mapping);
 
-      chart.title("Top 5 Countries Infected with Covid-19 in 10000s");
+    // Set point width.
+    series.pointWidth(10);
+
+      chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
+      // set the padding between bar groups
+      chart.barGroupsPadding(0.2);
+
 
       chart.container("chart");
 
