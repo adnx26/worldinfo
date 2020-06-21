@@ -52,6 +52,7 @@ function drawCoronaMap() {
 
       // Sets geodata using https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js
       map.geoData('anychart.maps.world');
+      
 
       // set chart padding
       map.padding(0);
@@ -146,25 +147,86 @@ function drawBarChart() {
 
 
       for (i = 0; i < size; i++) {
-        barChartData[i].push(listItem[i][0], Math.round(listItem[i][1] / 10000));
+        barChartData[i].push(listItem[i][0], listItem[i][1], listItem[i][2], listItem[i][3]);
       }
       console.log(barChartData);
 
 
       anychart.theme('darkBlue');
-      var dataset = anychart.data.set(barChartData);
-      var mapping = dataset.mapAs({ x: 0, value: 1 });
+      
+      
+     var dataSet = anychart.data.set(barChartData);
 
-      var chart = anychart.bar();
+     // map data for the first series, take x from the zero column and value from the first column of data set
+     var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
 
-      var series = chart.bar(mapping);
+     // map data for the second series, take x from the zero column and value from the second column of data set
+     var secondSeriesData = dataSet.mapAs({ x: 0, value: 3 });
+
+     // map data for the second series, take x from the zero column and value from the third column of data set
+     var thirdSeriesData = dataSet.mapAs({ x: 0, value: 2 });
+
+
+     // create bar chart
+     var chart = anychart.bar();
+
+     // turn on chart animation
+     chart.animation(false);
+
+     chart.padding([10, 40, 5, 20]);
+
+        // set chart title text settings
+        chart.title('Top 10 Infected Countries');
+
+        // set scale minimum
+        chart.yScale().minimum(0);
+
+        // force chart to stack values by Y scale.
+        chart.yScale().stackMode('value');
+        chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+        // set titles for axises
+        chart.xAxis().title('Products');
+        chart.yAxis().title('Revenue in Dollars');
+
+        // helper function to setup label settings for all series
+        var setupSeries = function (series, name) {
+          series.name(name);
+          series.stroke('3 #fff 1');
+          series.hovered().stroke('3 #fff 1');
+        };
+
+        // temp variable to store series instance
+        var series;
+
+        // create first series with mapped data
+        series = chart.bar(firstSeriesData);
+        setupSeries(series, 'Infected');
+
+        // create second series with mapped data
+        series = chart.bar(secondSeriesData);
+        setupSeries(series, 'Recovered');
+
+        // create third series with mapped data
+        series = chart.bar(thirdSeriesData);
+        setupSeries(series, 'Death');
+
+
+        // turn on legend
+        chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+
+        chart.interactivity().hoverMode('by-x');
+        chart.tooltip().valuePrefix('').displayMode('union');
+
+      
+      
 
       // Set point width.
       series.pointWidth(10);
 
-      chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
+      //chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
       // set the padding between bar groups
-      chart.barGroupsPadding(0.1);
+      chart.barGroupsPadding(1);
 
       chart.container("chart");
 
