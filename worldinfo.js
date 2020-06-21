@@ -77,7 +77,7 @@ function drawCoronaMap() {
       map.minBubbleSize('1%').maxBubbleSize('8%');
 
       // set bubble series settings
-      series.fill('red .6').stroke('#333').selectionMode('multi-select');
+      series.fill('yellow .6').stroke('#333').selectionMode('multi-select');
 
       // listen pointsSelect event
       map.listen('pointsSelect', function () {
@@ -137,12 +137,12 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], []
+        [], [], [], [], [],[], [], [], [], []
       ]
 
       console.log(coronadata);
 
-      var size = 5;
+      var size = 10;
       var listItem = coronadata.slice(0, size);
 
 
@@ -173,10 +173,12 @@ function drawBarChart() {
      // turn on chart animation
      chart.animation(false);
 
+ 
+
      chart.padding([10, 40, 5, 20]);
 
         // set chart title text settings
-        chart.title('Top 5 Infected Countries');
+        chart.title('Top 10 Infected Countries');
 
         // set scale minimum
         chart.yScale().minimum(0);
@@ -200,16 +202,39 @@ function drawBarChart() {
         var series;
 
         // create first series with mapped data
-        series = chart.bar(firstSeriesData);
-        setupSeries(series, 'Infected');
+        series1 = chart.bar(firstSeriesData);
+        setupSeries(series1, 'Infected');
+        series1.normal().fill("#ffff66", 1)
+        series1.hovered().fill("#ffff66", 0.5);
+        series1.selected().fill("#ffff66", 1);
+        series1.normal().stroke("#ffff66", 1, "1 1", "round");
+        series1.hovered().stroke("#ffff66", 2, "1 1", "round");
+        series1.selected().stroke("#ffff66  ", 4, "1 1", "round");
 
         // create second series with mapped data
-        series = chart.bar(secondSeriesData);
-        setupSeries(series, 'Recovered');
+        series2 = chart.bar(secondSeriesData);
+        setupSeries(series2, 'Recovered');
+        series2.normal().fill("#33cc33", 1)
+        series2.hovered().fill("#33cc33", 0.5);
+        series2.selected().fill("#33cc33", 1);
+        series2.normal().stroke("#33cc33", 1, "1 1", "round");
+        series2.hovered().stroke("#33cc33", 2, "1 1", "round");
+        series2.selected().stroke("#33cc33", 4, "1 1", "round");
 
         // create third series with mapped data
-        series = chart.bar(thirdSeriesData);
-        setupSeries(series, 'Death');
+        series3 = chart.bar(thirdSeriesData);
+        setupSeries(series3, 'Death');
+        series3.normal().fill("#e60000", 1)
+        series3.hovered().fill("#e60000", 0.5);
+        series3.selected().fill("#e60000", 1);
+        series3.normal().stroke("#e60000", 1, "1 1", "round");
+        series3.hovered().stroke("#e60000", 2, "1 1", "round");
+        series3.selected().stroke("#e60000", 4, "1 1", "round");
+
+      //Bar settings
+      
+      
+      
 
 
         // turn on legend
@@ -222,11 +247,13 @@ function drawBarChart() {
       
 
       // Set point width.
-      //series.pointWidth(10);
+      series1.pointWidth(10);
+      series2.pointWidth(10);
+      series3.pointWidth(10);
 
       //chart.title("Top 10 Countries Infected with Covid-19 in 10000s");
       // set the padding between bar groups
-      chart.barGroupsPadding(1);
+      chart.barGroupsPadding(0.1);
 
       chart.container("achart");
 
