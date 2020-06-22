@@ -52,7 +52,7 @@ function drawCoronaMap() {
 
       // Sets geodata using https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js
       map.geoData('anychart.maps.world');
-      
+
 
       // set chart padding
       map.padding(0);
@@ -137,7 +137,7 @@ function drawBarChart() {
 
 
       var barChartData = [
-        [], [], [], [], [],[], [], [], [], []
+        [], [], [], [], [], [], [], [], [], []
       ]
 
       console.log(coronadata);
@@ -153,101 +153,107 @@ function drawBarChart() {
 
 
       anychart.theme('darkBlue');
-      
-      
-     var dataSet = anychart.data.set(barChartData);
-
-     // map data for the first series, take x from the zero column and value from the first column of data set
-     var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
-
-     // map data for the second series, take x from the zero column and value from the second column of data set
-     var secondSeriesData = dataSet.mapAs({ x: 0, value: 3 });
-
-     // map data for the second series, take x from the zero column and value from the third column of data set
-     var thirdSeriesData = dataSet.mapAs({ x: 0, value: 2 });
 
 
-     // create bar chart
-     var chart = anychart.bar();
+      var dataSet = anychart.data.set(barChartData);
 
-     // turn on chart animation
-     chart.animation(false);
+      // map data for the first series, take x from the zero column and value from the first column of data set
+      var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
 
- 
+      // map data for the second series, take x from the zero column and value from the second column of data set
+      var secondSeriesData = dataSet.mapAs({ x: 0, value: 3 });
 
-     chart.padding([10, 40, 5, 20]);
+      // map data for the second series, take x from the zero column and value from the third column of data set
+      var thirdSeriesData = dataSet.mapAs({ x: 0, value: 2 });
 
-        // set chart title text settings
-        chart.title('Top 10 Infected Countries');
 
-        // set scale minimum
-        chart.yScale().minimum(0);
+      // create bar chart
+      var chart = anychart.bar();
 
-        // force chart to stack values by Y scale.
-        chart.yScale().stackMode('value');
-        chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+      // turn on chart animation
+      chart.animation(false);
 
-        // set titles for axises
-        chart.xAxis().title('Country');
-        chart.yAxis().title('');
 
-        // helper function to setup label settings for all series
-        var setupSeries = function (series, name) {
-          series.name(name);
-          series.stroke('3 #fff 1');
-          series.hovered().stroke('3 #fff 1');
-        };
 
-        // temp variable to store series instance
-        var series;
+      chart.padding([10, 40, 5, 20]);
 
-        // create first series with mapped data
-        series1 = chart.bar(firstSeriesData);
-        setupSeries(series1, 'Infected');
-        series1.normal().fill("#ffff66", 1)
-        series1.hovered().fill("#ffff66", 0.5);
-        series1.selected().fill("#ffff66", 1);
-        series1.normal().stroke("#ffff66", 1, "1 1", "round");
-        series1.hovered().stroke("#ffff66", 2, "1 1", "round");
-        series1.selected().stroke("#ffff66  ", 4, "1 1", "round");
+      // set chart title text settings
+      chart.title('Top 10 Infected Countries');
 
-        // create second series with mapped data
-        series2 = chart.bar(secondSeriesData);
-        setupSeries(series2, 'Recovered');
-        series2.normal().fill("#33cc33", 1)
-        series2.hovered().fill("#33cc33", 0.5);
-        series2.selected().fill("#33cc33", 1);
-        series2.normal().stroke("#33cc33", 1, "1 1", "round");
-        series2.hovered().stroke("#33cc33", 2, "1 1", "round");
-        series2.selected().stroke("#33cc33", 4, "1 1", "round");
+      // set scale minimum
+      chart.yScale().minimum(0);
 
-        // create third series with mapped data
-        series3 = chart.bar(thirdSeriesData);
-        setupSeries(series3, 'Death');
-        series3.normal().fill("#e60000", 1)
-        series3.hovered().fill("#e60000", 0.5);
-        series3.selected().fill("#e60000", 1);
-        series3.normal().stroke("#e60000", 1, "1 1", "round");
-        series3.hovered().stroke("#e60000", 2, "1 1", "round");
-        series3.selected().stroke("#e60000", 4, "1 1", "round");
+      // force chart to stack values by Y scale.
+      chart.yScale().stackMode('value');
+      chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+      // set titles for axises
+      chart.xAxis().title('Country');
+      chart.yAxis().title('');
+
+      // helper function to setup label settings for all series
+      var setupSeries = function (series, name) {
+        series.name(name);
+        series.stroke('3 #fff 1');
+        series.hovered().stroke('3 #fff 1');
+      };
+
+      // temp variable to store series instance
+      var series;
+
+      // create first series with mapped data
+      series1 = chart.bar(firstSeriesData);
+      setupSeries(series1, 'Infected');
+      series1.normal().fill("#ffff66", 1)
+      series1.hovered().fill("#ffff66", 0.5);
+      series1.selected().fill("#ffff66", 1);
+      series1.normal().stroke("#ffff66", 1, "1 1", "round");
+      series1.hovered().stroke("#ffff66", 2, "1 1", "round");
+      series1.selected().stroke("#ffff66  ", 4, "1 1", "round");
+
+      // create second series with mapped data
+      series2 = chart.bar(secondSeriesData);
+      setupSeries(series2, 'Recovered');
+      series2.normal().fill("#33cc33", 1)
+      series2.hovered().fill("#33cc33", 0.5);
+      series2.selected().fill("#33cc33", 1);
+      series2.normal().stroke("#33cc33", 1, "1 1", "round");
+      series2.hovered().stroke("#33cc33", 2, "1 1", "round");
+      series2.selected().stroke("#33cc33", 4, "1 1", "round");
+
+      // create third series with mapped data
+      series3 = chart.bar(thirdSeriesData);
+      setupSeries(series3, 'Death');
+      series3.normal().fill("#e60000", 1)
+      series3.hovered().fill("#e60000", 0.5);
+      series3.selected().fill("#e60000", 1);
+      series3.normal().stroke("#e60000", 1, "1 1", "round");
+      series3.hovered().stroke("#e60000", 2, "1 1", "round");
+      series3.selected().stroke("#e60000", 4, "1 1", "round");
 
       //Bar settings
       var labels = chart.xAxis().labels();
-      labels.fontFamily("Arial");
+      labels.enabled(true);
+      labels.fontFamily("Courier");
       labels.fontSize(10);
-      
-      
-      
+      labels.useHtml(false);
+      labels.width(55);
+      labels.wordWrap("break-word");
+      labels.wordBreak("break-all");
+      labels.hAlign("right");
+
+      var xAxis = chart.xAxis();
+      xAxis.overlapMode("allowOverlap");
 
 
-        // turn on legend
-        chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+      // turn on legend
+      chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
 
-        chart.interactivity().hoverMode('by-x');
-        chart.tooltip().valuePrefix('').displayMode('union');
+      chart.interactivity().hoverMode('by-x');
+      chart.tooltip().valuePrefix('').displayMode('union');
 
-      
-      
+
+
 
       // Set point width.
       series1.pointWidth(10);
