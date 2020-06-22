@@ -232,6 +232,9 @@ function drawBarChart() {
         series3.selected().stroke("#e60000", 4, "1 1", "round");
 
       //Bar settings
+      var labels = chart.xAxis().labels();
+      labels.fontFamily("Arial");
+      labels.fontSize(10);
       
       
       
