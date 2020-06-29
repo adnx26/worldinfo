@@ -25,8 +25,17 @@ function drawCoronaMap() {
 
         tempArr[0] = String(data.features[i].attributes.Country_Region);
         tempArr[1] = parseInt(data.features[i].attributes.Confirmed);
+        if (isNaN(tempArr[1])){
+          tempArr[1] = 0;
+        }
         tempArr[2] = parseInt(data.features[i].attributes.Deaths);
+        if (isNaN(tempArr[2])){
+          tempArr[2] = 0;
+        }
         tempArr[3] = parseInt(data.features[i].attributes.Recovered);
+        if (isNaN(tempArr[3])){
+          tempArr[3] = 0;
+        }
         tempArr[4] = parseFloat(data.features[i].attributes.Lat);
         tempArr[5] = parseFloat(data.features[i].attributes.Long_);
         tempArr[6] = parseInt(data.features[i].attributes.Last_Update);
@@ -40,18 +49,35 @@ function drawCoronaMap() {
       map = anychart.map();
       var d = new Date(coronadata[0][6]);
       var newDate = d.toLocaleDateString();
-      console.log(newDate);
 
 
       // set map title and title settings
-      map
-        .title()
-        .enabled(true)
-        .padding([10, 0, 10, 0])
-        .text('Last Updated ' + newDate);
+      
 
       // Sets geodata using https://cdn.anychart.com/geodata/2.0.0/custom/world/world.js
       map.geoData('anychart.maps.world');
+
+      console.log(coronadata);
+
+
+
+      //Get total infection rate
+      totalInf = coronadata.map(coronadata => coronadata[1]).reduce((prev, next) => prev + next);
+      totalDeath = coronadata.map(coronadata => coronadata[2]).reduce((prev, next) => prev + next);
+      
+      totalRecov = coronadata.map(coronadata => coronadata[3]).reduce((prev, next) => prev + next);
+      console.log(totalRecov);
+      
+      totalInf = totalInf.toLocaleString();
+      totalDeath = totalDeath.toLocaleString();
+      totalRecov = totalRecov.toLocaleString();
+
+      map
+        .title()
+        .enabled(true)
+        .padding([10, 2, 10, 2])
+        .text('Total Infected:'+ totalInf +  " | Total Deaths:" + totalDeath + " | Total Recovered:" + totalRecov + '\nLast Updated ' + newDate);
+
 
 
       // set chart padding
@@ -64,7 +90,7 @@ function drawCoronaMap() {
       var graphdata = anychart.data.set(coronadata);
       //Map the Data to the AnyChart Preferences
       var mapping = graphdata.mapAs({ name: 0, size: 1, deaths: 2, recovered: 3, lat: 4, long: 5, update: 6 });
-
+      
 
 
       // create bubble series
@@ -140,7 +166,6 @@ function drawBarChart() {
         [], [], [], [], [], [], [], [], [], []
       ]
 
-      console.log(coronadata);
 
       var size = 10;
       var listItem = coronadata.slice(0, size);
@@ -149,7 +174,6 @@ function drawBarChart() {
       for (i = 0; i < size; i++) {
         barChartData[i].push(listItem[i][0], listItem[i][1], listItem[i][2], listItem[i][3]);
       }
-      console.log(barChartData);
 
 
       anychart.theme('darkBlue');
@@ -271,5 +295,3 @@ function drawBarChart() {
   );
 
 }
-
-
