@@ -16,29 +16,33 @@ function drawCoronaMap() {
   anychart.theme('darkBlue');
   anychart.data.loadJsonFile(
     // The data is recived from the ESRI website https://www.esri.com/en-us/covid-19/overview
-    'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json',
+    'https://raw.githubusercontent.com/adnx26/worldinfo/master/testFileCSVJSON.json',
     function (data) {
       var coronadata = [];
 
       var tempArr = [];
-      for (i = 0; i < data.features.length; i++) {
 
-        tempArr[0] = String(data.features[i].attributes.Country_Region);
-        tempArr[1] = parseInt(data.features[i].attributes.Confirmed);
+      console.log(data)
+
+
+      for (i = 0; i < data.length; i++) {
+
+        tempArr[0] = String(data[i].Country_Region);
+        tempArr[1] = parseInt(data[i].Confirmed);
         if (isNaN(tempArr[1])){
           tempArr[1] = 0;
         }
-        tempArr[2] = parseInt(data.features[i].attributes.Deaths);
+        tempArr[2] = parseInt(data[i].Deaths);
         if (isNaN(tempArr[2])){
           tempArr[2] = 0;
         }
-        tempArr[3] = parseInt(data.features[i].attributes.Recovered);
+        tempArr[3] = parseInt(data[i].Recovered);
         if (isNaN(tempArr[3])){
           tempArr[3] = 0;
         }
-        tempArr[4] = parseFloat(data.features[i].attributes.Lat);
-        tempArr[5] = parseFloat(data.features[i].attributes.Long_);
-        tempArr[6] = parseInt(data.features[i].attributes.Last_Update);
+        tempArr[4] = parseFloat(data[i].Lat);
+        tempArr[5] = parseFloat(data[i].Long_);
+        tempArr[6] = parseInt(data[i].Last_Update);
 
         coronadata[i] = tempArr;
         tempArr = [];
@@ -48,7 +52,14 @@ function drawCoronaMap() {
       coronadata.sort((a, b) => b[1] - a[1]);
       map = anychart.map();
       var d = new Date(coronadata[0][6]);
-      var newDate = d.toLocaleDateString();
+
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = mm + '/' + dd + '/' + yyyy;
+      var newDate = today;
 
 
       // set map title and title settings
@@ -76,7 +87,7 @@ function drawCoronaMap() {
         .title()
         .enabled(true)
         .padding([10, 2, 10, 2])
-        .text('Total Infected:'+ totalInf +  " | Total Deaths:" + totalDeath + " | Total Recovered:" + totalRecov + '\nLast Updated ' + newDate);
+        .text('Total Infected:'+ totalInf +  " | Total Deaths:" + totalDeath + '\nLast Updated ' + newDate);
 
 
 
@@ -97,7 +108,7 @@ function drawCoronaMap() {
       var series = map.bubble(mapping);
 
       series.labels().format("{%name}");
-      series.tooltip().format("{%size} Infected \n{%deaths} Death \n{%recovered} Recovered ")
+      series.tooltip().format("{%size} Infected \n{%deaths} Death")
 
       // set chart bubble settings
       map.minBubbleSize('1%').maxBubbleSize('8%');
@@ -137,26 +148,41 @@ function drawCoronaMap() {
 
 function drawBarChart() {
   anychart.data.loadJsonFile(
-    'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json',
+    'https://raw.githubusercontent.com/adnx26/worldinfo/master/testFileCSVJSON.json',
 
     function (data) {
       //Get Data from the ESRI website https://www.esri.com/en-us/covid-19/overview
+
+
+      var usCount = 0;
+      var usCountDead = 0;
+      var usCountRecover = 0;
+
       var coronadata = [];
 
       var tempArr = [];
-      for (i = 0; i < data.features.length; i++) {
+      for (i = 0; i < data.length; i++) {
 
-        tempArr[0] = String(data.features[i].attributes.Country_Region);
-        tempArr[1] = parseInt(data.features[i].attributes.Confirmed);
-        tempArr[2] = parseInt(data.features[i].attributes.Deaths);
-        tempArr[3] = parseInt(data.features[i].attributes.Recovered);
-        tempArr[4] = parseFloat(data.features[i].attributes.Lat);
-        tempArr[5] = parseFloat(data.features[i].attributes.Long_);
-        tempArr[6] = parseInt(data.features[i].attributes.Last_Update);
+        tempArr[0] = String(data[i].Country_Region);
+        tempArr[1] = parseInt(data[i].Confirmed);
+        tempArr[2] = parseInt(data[i].Deaths);
+        tempArr[3] = parseInt(data[i].Recovered);
+        tempArr[4] = parseFloat(data[i].Lat);
+        tempArr[5] = parseFloat(data[i].Long_);
+        tempArr[6] = parseInt(data[i].Last_Update);
+
+
+        if(data[i].Country_Region == "US"){
+          usCount += data[i].Confirmed;
+          usCountDead += data[i].Deaths;
+          usCountRecover += data[i].Recovered;
+        }
 
         coronadata[i] = tempArr;
         tempArr = [];
       }
+
+      coronadata.push(["United States", usCount, usCountDead])
 
       //Sort Data by Conformed Rate
       coronadata.sort((a, b) => b[1] - a[1]);
